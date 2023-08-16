@@ -34,7 +34,7 @@ if __name__ == '__main__':
                 potStr = line.decode('utf-8')
                 potStr = potStr.strip()
                 print(potStr)
-                potVal = int(potStr)
+                potVal = 501
                 # Publish LED state
                 if (potVal > 500):
                     LEDState = 1
