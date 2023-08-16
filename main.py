@@ -33,6 +33,7 @@ if __name__ == '__main__':
                 line = ser.readline()
                 potStr = line.decode('utf-8')
                 potStr = potStr.strip()
+                print(potStr)
                 potVal = int(potStr)
                 # Publish LED state
                 if (potVal > 500):
