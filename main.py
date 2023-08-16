@@ -30,7 +30,7 @@ if __name__ == '__main__':
                 line = ser.readline()
                 potStr = line.decode('utf-8')
                 print(potStr)
-                potVal = parseInt(potStr)
+                potVal = 501
                 # Publish LED state
                 if (potVal > 500):
                     LEDState = 1
