@@ -31,7 +31,7 @@ if __name__ == '__main__':
             if (ser.in_waiting > 0):
                 # Read serial information
                 line = ser.readline()
-                potStr = line.decode('utf-8')
+                potStr = line.decode('ascii')
                 potVal = parseInt(potStr)
                 # Publish LED state
                 if (potVal != None):
