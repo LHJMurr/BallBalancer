@@ -31,14 +31,14 @@ if __name__ == '__main__':
             if (ser.in_waiting > 0):
                 # Read serial information
                 line = ser.readline()
-                potStr = line.decode('ascii')
-                potVal = parseInt(potStr)
+                potStr = line.decode('utf-8')
+                potStr = potStr.strip()
+                potVal = int(potStr)
                 # Publish LED state
-                if (potVal != None):
-                    if (potVal > 500):
-                        LEDState = 1
-                    else:
-                        LEDState = 0
+                if (potVal > 500):
+                    LEDState = 1
+                else:
+                    LEDState = 0
                 sendStr = str(LEDState) + '\n'
                 ser.write(sendStr.encode('utf-8'))
         except Exception as e:
