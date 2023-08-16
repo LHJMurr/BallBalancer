@@ -31,7 +31,8 @@ if __name__ == '__main__':
                     LEDState = 0
                 sendStr = str(LEDState) + '\n'
                 ser.write(sendStr.encode('utf-8'))
-        except:
-            print("Exception raised. Closing serial communications...")
+        except Exception as e:
+            print("Exception raised. Closing serial communications. Exception details: ")
+            print(e)
             ser.close()
             break
