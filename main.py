@@ -5,7 +5,7 @@ def parseInt(input):
     print(input)
     intStr = ''
     for i in input:
-        if i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]:
+        if i in ['1', '2', '3', '4', '5', '6', '7', '8', '9','0']:
              intStr = intStr + i
     if intStr != '':
         return int(intStr)
