@@ -9,7 +9,7 @@ def parseInt(input):
              intStr = intStr + i
     if intStr != '':
         return int(intStr)
-    return -1
+    return None
 
 if __name__ == '__main__':
     # Initialze
@@ -34,7 +34,7 @@ if __name__ == '__main__':
                 potStr = line.decode('utf-8')
                 potVal = parseInt(potStr)
                 # Publish LED state
-                if (potVal >= 0):
+                if (potVal != None):
                     if (potVal > 500):
                         LEDState = 1
                     else:
