@@ -19,9 +19,7 @@ if __name__ == '__main__':
     except:
         raise Exception("Inputted baud rate must be an integer.")
     ser = serial.Serial(portStr, baudRate)
-    ser.reset_input_buffer() # Clear incoming/outgoing signals
-    ser.reset_output_buffer()
-    time.sleep(3) # Allow arduino to reboot
+    ser.flush()
 
     LEDState = 0 # Off by default
 
