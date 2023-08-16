@@ -2,11 +2,14 @@ import serial
 import time
 
 def parseInt(input):
+    print(input)
     intStr = ''
     for i in input:
         if i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]:
              intStr = intStr + i
-    return int(intStr)
+    if intStr != '':
+        return int(intStr)
+    return 0
 
 if __name__ == '__main__':
     # Initialze
@@ -29,8 +32,7 @@ if __name__ == '__main__':
                 # Read serial information
                 line = ser.readline()
                 potStr = line.decode('utf-8')
-                print(potStr)
-                potVal = 501
+                potVal = parseInt(potStr)
                 # Publish LED state
                 if (potVal > 500):
                     LEDState = 1
