@@ -9,7 +9,7 @@ def parseInt(input):
              intStr = intStr + i
     if intStr != '':
         return int(intStr)
-    return 0
+    return -1
 
 if __name__ == '__main__':
     # Initialze
@@ -34,10 +34,11 @@ if __name__ == '__main__':
                 potStr = line.decode('utf-8')
                 potVal = parseInt(potStr)
                 # Publish LED state
-                if (potVal > 500):
-                    LEDState = 1
-                else:
-                    LEDState = 0
+                if (potVal >= 0):
+                    if (potVal > 500):
+                        LEDState = 1
+                    else:
+                        LEDState = 0
                 sendStr = str(LEDState) + '\n'
                 ser.write(sendStr.encode('utf-8'))
         except Exception as e:
