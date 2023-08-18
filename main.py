@@ -1,16 +1,6 @@
 import serial
 import time
 
-def parseInt(input):
-    print(input)
-    intStr = ''
-    for i in input:
-        if i in ['1', '2', '3', '4', '5', '6', '7', '8', '9','0']:
-             intStr = intStr + i
-    if intStr != '':
-        return int(intStr)
-    return None
-
 if __name__ == '__main__':
     # Initialze
     portStr = input("Enter serial port: ")
@@ -19,20 +9,21 @@ if __name__ == '__main__':
     except:
         raise Exception("Inputted baud rate must be an integer.")
     ser = serial.Serial(portStr, baudRate)
-    ser.flush()
+    ser.reset_input_buffer() # Clear incoming/outgoing signals
+    ser.reset_output_buffer()
+    time.sleep(3)
 
     LEDState = 0 # Off by default
 
     # Serial Loop
-    while True:
-        try:
+    try:
+        while True:
             if (ser.in_waiting > 0):
                 # Read serial information
                 line = ser.readline()
-                potStr = line.decode('utf-8')
-                potStr = potStr.strip()
-                print(potStr)
-                potVal = 501
+                potStr = line.decode('utf-8').strip()
+                print(repr(potStr))
+                potVal = int(potStr)
                 # Publish LED state
                 if (potVal > 500):
                     LEDState = 1
@@ -40,8 +31,9 @@ if __name__ == '__main__':
                     LEDState = 0
                 sendStr = str(LEDState) + '\n'
                 ser.write(sendStr.encode('utf-8'))
-        except Exception as e:
-            print("Exception raised. Closing serial communications. Exception details: ")
-            print(e)
-            ser.close()
-            break
+    except Exception as e:
+        print("Exception raised. Closing serial communications...")
+        print(e)
+        ser.close()
+    finally:
+        ser.close()
