@@ -22,6 +22,7 @@ if __name__ == '__main__':
                 # Read serial information
                 line = ser.readline()
                 potStr = line.decode('utf-16').strip()
+                print(repr(potStr))
                 potVal = int(potStr)
                 print(f'REPR of decoded string: {repr(potStr)}   ||   Integer Value detected: {potVal}')
                 # Publish LED state
