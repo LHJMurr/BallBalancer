@@ -21,7 +21,7 @@ if __name__ == '__main__':
             if (ser.in_waiting > 0):
                 # Read serial information
                 line = ser.readline()
-                potStr = line.decode('utf-16').strip()
+                potStr = line.decode('utf-8').strip()
                 print(repr(potStr))
                 potVal = int(potStr)
                 print(f'REPR of decoded string: {repr(potStr)}   ||   Integer Value detected: {potVal}')
