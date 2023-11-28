@@ -5,7 +5,7 @@
 MotorManager manager; // empty manager object. Initialize in setup.
 
 // FOR TESTING
-float highTarget[3] = {120.0, 120.0, 120.0};
+float highTarget[3] = {120.0, 150.0, 150.0};
 float lowTarget[3] = {MotorManager::START_ANGLE, MotorManager::START_ANGLE, MotorManager::START_ANGLE};
 bool up = true;
 
@@ -21,20 +21,21 @@ void setup() {
   Serial.begin(9600);
   delay(1000); 
 
-  manager.setTarget(highTarget);
+  manager.setUniformMicrostep(StepperMotor::SIXTEENTHSTEP);
+  manager.setTarget(highTarget, 20.0);
 }
 
 void loop() {
-  if (up) {
-    manager.setTarget(highTarget);
-    manager.setUniformMicrostep(StepperMotor::SIXTEENTHSTEP);
-  }
-  else {
-    manager.setTarget(lowTarget);
-    manager.setUniformMicrostep(StepperMotor::EIGTHSTEP);
-  }
   if(manager.moveMotors()) {
     up = !up;
+    if (up) {
+      manager.setUniformMicrostep(StepperMotor::SIXTEENTHSTEP);
+      manager.setTarget(highTarget, 40.0);
+    }
+    else {
+      manager.setUniformMicrostep(StepperMotor::SIXTEENTHSTEP);
+      manager.setTarget(lowTarget, 40.0);
+    }
   }
 
   /*

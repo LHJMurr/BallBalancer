@@ -11,7 +11,7 @@ class MotorManager {
     MotorManager();
     ~MotorManager();
     void initialize(int numMotors, StepperMotor* motors);
-    void setTarget(float* targetAngles);
+    void setTarget(float* targetAngles, float maxOmega); // maxOmega is the max angular velocity of any motor in degrees/second
     bool moveMotors();
     void printAngles() const;
     void setUniformMicrostep(int microstep);
@@ -22,7 +22,10 @@ class MotorManager {
     int m_numMotors; // Number of motors to control.
     StepperMotor* m_motors; // Array of stepper motor objects. Create externally then pass as a parameter into initialize().
     float* m_targetAngles; // Array of angles for each motor to move towards
-    float* m_currentAngles; // Array containing current angle information (dynamically allocated)
+    float* m_currentAngles; // Array containing current angle information
+    float* m_secondsPerTick; // Array containing the number of seconds per tick for each motor
+    float* m_lastTicks; // Array containing the time when each motor last ticked.
+    
     // Functions
     int directionCoefficient(bool dir) const;
 };
